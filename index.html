@@ -220,17 +220,13 @@
       "RITUAL D // writing about each other like we are carving legacies into the world",
       "RITUAL E // wholesome freaky hours past three am."
     ],
-
-    // ✅ FIX: object keys can't have spaces unless quoted.
-    // We keep the tab as "lines" (data-tab="lines") so the UI still works.
-    lines: [
+    confessions that lurk: [
       "Confession // “my library of Alexandria and your forbidden fruit.”",
       "Confession // “sky flavored skittles when. fuck tasting the rainbow. I wanna taste YOU..”",
-      "Confession // “too good to be true.”",
+      "Confession// “too good to be true.”",
       "Confession // fighting godzilla with a toothpick",
       "Confession // taking down the moon and stars to get you back"
     ],
-
     future: [
       "alternate timeline // Take me to that big hill where i tel u the secrets of the stars.",
       "alternate timeline // fucking in a car. Do u think the universe fights for some souls to stay together?",
@@ -256,13 +252,7 @@
     decryptedCount = 0;
     used = [];
     pool = [...DATA[currentTab]];
-
-    // ✅ FIX: your middle tab is "lines" (not "confessions that lurk")
-    screenTitle.textContent =
-      tab === "rituals" ? "01 // Rituals" :
-      tab === "lines"  ? "02 // confessions that lurk" :
-                         "03 // What We Coulda Been";
-
+    screenTitle.textContent = tab === "rituals" ? "01 // Rituals" : tab === "lines" ? "02 // Lines" : "03 // What We Coulda Been";
     counter.textContent = "DECRYPTED: 0";
     screenBody.textContent = ">> Click “Decrypt next” to reveal.\n";
     secretBox.style.display = "none";
@@ -306,7 +296,8 @@
   document.getElementById("shuffleBtn").addEventListener("click", shuffle);
   document.getElementById("wipeBtn").addEventListener("click", wipe);
 
-  const KEYWORD = "serendipity";
+  // Secret keyword Easter egg (change KEYWORD + message).
+  const KEYWORD = "serendipity"; // <- change this to something only he knows
   const SECRET_MESSAGE = [
     "ACCESS GRANTED.",
     "",

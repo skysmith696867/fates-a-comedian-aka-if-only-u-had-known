@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>🎞️✨FORBIDDEN CASE FILE // SKAL✨🎞️</title>
+  <style>
+    :root{
+      --bg:#0b0c10;
+      --panel:#0f1118;
+      --ink:#e9e9ef;
+      --muted:#9aa0b2;
+      --line:rgba(255,255,255,.12);
+      --glow:rgba(160,180,255,.25);
+      --accent:#b8b8ff;
+      --danger:#ff5c7a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(900px 600px at 20% 10%, rgba(184,184,255,.10), transparent 60%),
+        radial-gradient(700px 500px at 80% 30%, rgba(255,92,122,.07), transparent 60%),
+        linear-gradient(180deg, #05060a, var(--bg));
+      color:var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+    .wrap{width:min(920px, 92vw); padding:28px}
+    .top{
+      display:flex; gap:16px; justify-content:space-between; align-items:flex-start;
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: 0 10px 40px rgba(0,0,0,.45);
+      padding:18px 18px 14px;
+      border-radius:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .top::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(500px 220px at 30% 0%, rgba(184,184,255,.12), transparent 55%);
+      pointer-events:none;
+    }
+    h1{margin:0; font-size:16px; letter-spacing:.12em}
+    .tag{color:var(--muted); font-size:12px; margin-top:6px}
+    .status{
+      text-align:right; font-size:12px; color:var(--muted);
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .pill{
+      display:inline-flex; gap:8px; align-items:center; justify-content:flex-end;
+      padding:6px 10px; border:1px solid var(--line); border-radius:999px;
+      background: rgba(0,0,0,.2);
+    }
+    .dot{
+      width:8px; height:8px; border-radius:50%;
+      background: rgba(184,184,255,.8);
+      box-shadow: 0 0 18px var(--glow);
+    }
+
+    .grid{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 290px 1fr;
+      gap:14px;
+    }
+    @media (max-width: 780px){
+      .grid{grid-template-columns:1fr}
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      background: rgba(15,17,24,.75);
+      border-radius:16px;
+      padding:14px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.35);
+    }
+
+    .tabs{display:flex; flex-direction:column; gap:10px}
+    button.tab{
+      width:100%;
+      text-align:left;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color:var(--ink);
+      padding:12px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.15s transform, .15s background;
+    }
+    button.tab:hover{transform: translateY(-1px); background: rgba(255,255,255,.05)}
+    button.tab.active{border-color: rgba(184,184,255,.35); box-shadow:0 0 0 2px rgba(184,184,255,.10) inset}
+    .hint{color:var(--muted); font-size:12px; line-height:1.45; margin-top:10px}
+
+    .screen{
+      min-height:340px;
+      padding:14px;
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.18));
+      position:relative;
+    }
+    .screen .title{
+      font-size:12px; letter-spacing:.16em; color:var(--muted);
+      display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:10px;
+    }
+    .mono{white-space:pre-wrap; line-height:1.6; font-size:14px}
+    .actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color:var(--ink);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      transition:.15s transform, .15s background, .15s border;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.08)}
+    .btn.primary{border-color: rgba(184,184,255,.35)}
+    .btn.danger{border-color: rgba(255,92,122,.35)}
+    .footer{
+      margin-top:14px;
+      display:flex; gap:10px; flex-wrap:wrap; justify-content:space-between; align-items:center;
+      color:var(--muted); font-size:12px;
+    }
+    input{
+      width:min(320px, 100%);
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.25);
+      color:var(--ink);
+      padding:10px 12px;
+      border-radius:12px;
+      outline:none;
+    }
+    .secret{
+      margin-top:12px;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(184,184,255,.22);
+      background: rgba(184,184,255,.06);
+      display:none;
+    }
+    .stamp{
+      position:absolute; right:14px; bottom:12px;
+      border:1px solid rgba(255,255,255,.14);
+      padding:6px 10px;
+      border-radius:10px;
+      font-size:11px;
+      color:rgba(233,233,239,.75);
+      transform: rotate(-2deg);
+      background: rgba(0,0,0,.18);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <h1> 🎞️✨FORBIDDEN CASE FILE // SKAL✨🎞️ </h1>
+        <div class="tag">small system. A coded confession. Fight to find it. Earn it. Click clack. Decrypt.</div>
+      </div>
+      <div class="status">
+        <div class="pill"><span class="dot"></span> STATUS: ACTIVE</div>
+        <div class="pill">CLEARANCE: “ONLY YOU”</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="panel">
+        <div class="tabs">
+          <button class="tab active" data-tab="rituals">01 // Rituals</button>
+          <button class="tab" data-tab="lines">02 // confessions that lurk</button>
+          <button class="tab" data-tab="future">03 // What We Coulda Been</button>
+        </div>
+        <div class="hint">
+          rule: no monologues.<br/>
+          be a detective. 
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="screen">
+          <div class="title">
+            <span id="screenTitle">01 // Rituals</span>
+            <span id="counter">DECRYPTED: 0</span>
+          </div>
+
+          <div class="mono" id="screenBody"></div>
+
+          <div class="actions">
+            <button class="btn primary" id="decryptBtn">Decrypt next</button>
+            <button class="btn" id="shuffleBtn">Shuffle</button>
+            <button class="btn danger" id="wipeBtn">Wipe screen</button>
+          </div>
+
+          <div class="footer">
+            <span>Tip: type a keyword below. If you’re right, it opens something.</span>
+            <input id="keyInput" placeholder="keyword…" autocomplete="off" />
+          </div>
+
+          <div class="secret" id="secretBox"></div>
+
+          <div class="stamp">EVIDENCE LOG // DO NOT FORWARD</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const DATA = {
+    rituals: [
+      "RITUAL A // late night texts in our own pocket dimension.",
+      "RITUAL B // dinner olympics. We made the same food and had our own cooking show",
+      "RITUAL C // memory albums.",
+      "RITUAL D // writing about each other like we are carving legacies into the world",
+      "RITUAL E // wholesome freaky hours past three am."
+    ],
+    confessions that lurk: [
+      "Confession // “my library of Alexandria and your forbidden fruit.”",
+      "Confession // “sky flavored skittles when. fuck tasting the rainbow. I wanna taste YOU..”",
+      "Confession// “too good to be true.”",
+      "Confession // fighting godzilla with a toothpick",
+      "Confession // taking down the moon and stars to get you back"
+    ],
+    future: [
+      "alternate timeline // Take me to that big hill where i tel u the secrets of the stars.",
+      "alternate timeline // fucking in a car. Do u think the universe fights for some souls to stay together?",
+      "alternate timeline // intergalactic picnics. My suppressed gun sneezes send me flying and u ground me and fight to keep us.",
+      "alternate timeline // He looks at you like: oh. you’re still you.",
+      "alternate timeline // abandoned movie theater. Just us. Watching a crossover of serendipity and forgetting sarah marshall. Plot twist. I leave first "
+    ]
+  };
+
+  let currentTab = "rituals";
+  let decryptedCount = 0;
+  let pool = [...DATA[currentTab]];
+  let used = [];
+
+  const screenTitle = document.getElementById("screenTitle");
+  const screenBody  = document.getElementById("screenBody");
+  const counter     = document.getElementById("counter");
+  const secretBox   = document.getElementById("secretBox");
+  const keyInput    = document.getElementById("keyInput");
+
+  function setTab(tab){
+    currentTab = tab;
+    decryptedCount = 0;
+    used = [];
+    pool = [...DATA[currentTab]];
+    screenTitle.textContent = tab === "rituals" ? "01 // Rituals" : tab === "lines" ? "02 // Lines" : "03 // What We Coulda Been";
+    counter.textContent = "DECRYPTED: 0";
+    screenBody.textContent = ">> Click “Decrypt next” to reveal.\n";
+    secretBox.style.display = "none";
+    secretBox.textContent = "";
+    keyInput.value = "";
+  }
+
+  function decryptNext(){
+    if(pool.length === 0){
+      screenBody.textContent += "\n>> END OF ENDLESS FILE.\n";
+      return;
+    }
+    const i = Math.floor(Math.random() * pool.length);
+    const item = pool.splice(i,1)[0];
+    used.push(item);
+    decryptedCount++;
+    counter.textContent = "DECRYPTED: " + decryptedCount;
+    screenBody.textContent += "\n" + item;
+  }
+
+  function shuffle(){
+    pool = pool.sort(() => Math.random() - 0.5);
+    screenBody.textContent += "\n\n>> shuffled.\n";
+  }
+
+  function wipe(){
+    screenBody.textContent = ">> wiped.\n";
+    decryptedCount = 0;
+    counter.textContent = "DECRYPTED: 0";
+  }
+
+  document.querySelectorAll(".tab").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll(".tab").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      setTab(btn.dataset.tab);
+    });
+  });
+
+  document.getElementById("decryptBtn").addEventListener("click", decryptNext);
+  document.getElementById("shuffleBtn").addEventListener("click", shuffle);
+  document.getElementById("wipeBtn").addEventListener("click", wipe);
+
+  // Secret keyword Easter egg (change KEYWORD + message).
+  const KEYWORD = "serendipity"; // <- change this to something only he knows
+  const SECRET_MESSAGE = [
+    "ACCESS GRANTED.",
+    "",
+    "If you ever wonder whether it was real:",
+    "it left fingerprints.",
+    "",
+    "— end transmission."
+  ].join("\n");
+
+  keyInput.addEventListener("input", ()=>{
+    const val = keyInput.value.trim().toLowerCase();
+    if(val === KEYWORD){
+      secretBox.style.display = "block";
+      secretBox.textContent = SECRET_MESSAGE;
+    } else {
+      secretBox.style.display = "none";
+      secretBox.textContent = "";
+    }
+  });
+
+  // init
+  setTab("rituals");
+</script>
+</body>
+</html>

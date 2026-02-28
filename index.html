@@ -220,7 +220,7 @@
       "RITUAL D // writing about each other like we are carving legacies into the world",
       "RITUAL E // wholesome freaky hours past three am."
     ],
-    confessions that lurk: [
+    lines: [
       "Confession // “my library of Alexandria and your forbidden fruit.”",
       "Confession // “sky flavored skittles when. fuck tasting the rainbow. I wanna taste YOU..”",
       "Confession// “too good to be true.”",
@@ -252,7 +252,7 @@
     decryptedCount = 0;
     used = [];
     pool = [...DATA[currentTab]];
-    screenTitle.textContent = tab === "rituals" ? "01 // Rituals" : tab === "lines" ? "02 // Lines" : "03 // What We Coulda Been";
+    screenTitle.textContent = tab === "rituals" ? "01 // Rituals" : tab === "lines" ? "02 // confessions that lurk" : "03 // What We Coulda Been";
     counter.textContent = "DECRYPTED: 0";
     screenBody.textContent = ">> Click “Decrypt next” to reveal.\n";
     secretBox.style.display = "none";
@@ -296,8 +296,7 @@
   document.getElementById("shuffleBtn").addEventListener("click", shuffle);
   document.getElementById("wipeBtn").addEventListener("click", wipe);
 
-  // Secret keyword Easter egg (change KEYWORD + message).
-  const KEYWORD = "serendipity"; // <- change this to something only he knows
+  const KEYWORD = "serendipity";
   const SECRET_MESSAGE = [
     "ACCESS GRANTED.",
     "",
@@ -318,7 +317,6 @@
     }
   });
 
-  // init
   setTab("rituals");
 </script>
 </body>
